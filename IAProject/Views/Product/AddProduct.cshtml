@@ -1,0 +1,62 @@
+﻿@model IAProject.ModelView.ProductCategory
+
+@{
+    ViewBag.Title = "AddProduct";
+}
+
+<h2 style="text-align-last:center">Add New Product</h2>
+
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <form>
+        <div class="form-horizontal" style="margin-left: 275px;">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group" style="margin-left: 222px;">
+                <label for="Picture">Product Picture</label>
+                @Html.TextBoxFor(model => model.MyProduct.Image, new { type = "file" })
+            </div>
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.MyProduct.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MyProduct.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MyProduct.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MyProduct.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MyProduct.Price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MyProduct.Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MyProduct.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.MyProduct.CategoryID, new SelectList(Model.Category, "Id", "Name"), "Select Category", new { @class = "form-control " })
+                    @Html.ValidationMessageFor(model => model.MyProduct.CategoryID, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="form-group" style="margin-bottom: 0px;margin-top: 50px;margin-left: 0px;">
+                    @Html.LabelFor(model => model.MyProduct.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.MyProduct.Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MyProduct.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" style="width: 106px;height: 38px;margin-left: 80px;" />
+                    </div>
+                </div>
+            </div>
+</form>
+}
